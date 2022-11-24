@@ -19,6 +19,15 @@ fn main() -> Result<()> {
     for entry in read_dir("./")
         ?.filter_map(|e| e.ok()) {
 
+            // Convert directory entry to string
+            let entry = entry
+                .path()
+                .to_str()
+                .map(String::from)
+                .ok_or_else(|| {
+                    Error::Generic(f!("Invalid path: {entry:?}"))
+                })?;
+
             println!("{entry:?}");
     }
 
