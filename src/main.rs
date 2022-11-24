@@ -9,10 +9,20 @@ mod prelude;
 mod utils;
 
 use crate::prelude::*;
+use std::fs::read_dir;
 
 
 fn main() -> Result<()> {
     println!("Hello, world!");
+    println!();
+
+    for entry in read_dir("./")
+        ?.filter_map(|e| e.ok()) {
+
+            println!("{entry:?}");
+    }
+
+    println!();
 
     Ok(())
 }
